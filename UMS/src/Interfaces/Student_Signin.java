@@ -139,14 +139,20 @@ public class Student_Signin extends javax.swing.JFrame {
                             //ResultSet rst=stmt.executeQuery("SELECT subName from subject where id in (SELECT subId from std_sub where stdId=(Select id from student where userName='"+userName+"'and password='"+password+"'));");
             ResultSet rs=stmt.executeQuery( "select * from Student_details where S_userName='"+username+"'and s_password='"+password+"';");
                             
-            if(username.equals("S_Username")&&password.equals("S_Password")){
-                while (rs.next()) {
+            if(username.equals("S_Username")){
+                if(password.equals("S_Password")){
+                    while (rs.next()) {
                                 
                     sp.setVisible(true);
                                 
                             }
+                }else{
+                    JOptionPane.showMessageDialog(this,"Password is Incorrect");
+                }
+                   
+                
             }else{
-                JOptionPane.showMessageDialog(null,"Username or Password Incorrect");
+                JOptionPane.showMessageDialog(null,"Username Incorrect");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
