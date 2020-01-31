@@ -276,7 +276,7 @@ public class Lecturers extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Courses"
+                "Course_Id", "Course_Name"
             }
         ));
         jScrollPane1.setViewportView(tblLecturerDetails);
