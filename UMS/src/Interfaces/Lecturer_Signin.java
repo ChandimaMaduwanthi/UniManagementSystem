@@ -7,12 +7,15 @@ package Interfaces;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import lab_2.Lecturer;
 
 /**
  *
@@ -20,6 +23,12 @@ import javax.swing.JOptionPane;
  */
 public class Lecturer_Signin extends javax.swing.JFrame {
 
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    LecControl lecControl=new LecControl();
+    Lecturer lec=new Lecturer();
+    public static Lecturer_Signin lecSignIn=new Lecturer_Signin();
     /**
      * Creates new form Signup
      */
@@ -43,19 +52,35 @@ public class Lecturer_Signin extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnSignin = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University management System");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(680, 570));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 204, 255));
         jLabel1.setText("Lecturer Sign in Form");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(80, 50, 342, 42);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Username : ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(80, 169, 123, 28);
+        getContentPane().add(txtUsername);
+        txtUsername.setBounds(220, 170, 260, 28);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password : ");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(80, 268, 118, 28);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(220, 270, 260, 28);
 
         btnSignin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSignin.setText("Sign in");
@@ -64,6 +89,8 @@ public class Lecturer_Signin extends javax.swing.JFrame {
                 btnSigninActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSignin);
+        btnSignin.setBounds(158, 369, 135, 51);
 
         btnCancel.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnCancel.setText("Cancel");
@@ -72,84 +99,69 @@ public class Lecturer_Signin extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCancel);
+        btnCancel.setBounds(379, 369, 137, 51);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
-                .addComponent(btnSignin)
-                .addGap(82, 82, 82)
-                .addComponent(btnCancel)
-                .addGap(164, 164, 164))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSignin)
-                    .addComponent(btnCancel))
-                .addContainerGap(61, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\ASUS\\Desktop\\stock-photo-wood-working-table-pencil-tablet-laptop-computer-notebook-top-view-72ca800d-ef9b-46fb-8600-efdf7051f038.jpg")); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 20, 630, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        Start st=new Start();
+        st.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSigninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninActionPerformed
         // TODO add your handling code here:
         String username=txtUsername.getText();
         String password=txtPassword.getText();
-        Lecturer_Profile lp=new Lecturer_Profile();
+        
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/University_database", "root","");
-            Statement  stmt=con.createStatement();
-                            //ResultSet rst=stmt.executeQuery("SELECT subName from subject where id in (SELECT subId from std_sub where stdId=(Select id from student where userName='"+userName+"'and password='"+password+"'));");
-            ResultSet rs=stmt.executeQuery( "select * from Lecturer_details where L_userName='"+username+"'and L_password='"+password+"';");
-                            
-            if(username.equals("L_Username")&&password.equals("L_Password")){
-                while (rs.next()) {
-                                
+          /* Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/University_database", "root","");
+           pst = null;
+            String q="select S_Username,S_Password from Student_details where S_userName='"+username+"'; ";
+            pst=con.prepareStatement(q);
+            rs=pst.executeQuery();
+            
+            while (rs.next()) {
+                    if(password.equals(rs.getString("S_Password"))){
+                    Lecturer lp=new Lecturer();
                     lp.setVisible(true);
-                                
-                            }
-            }else{
+                    
+                    }else{
                 JOptionPane.showMessageDialog(null,"Username or Password Incorrect");
             }
+                }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       try{*/
+            JFrame frame=new JFrame();
+            String userName=txtUsername.getText();
+            password=txtPassword.getText();
+            lec=lecControl.lecSignIn(userName, password);
+            if(lec!=null){
+                Lecturers lecProfile=new Lecturers(lec);
+                lecProfile.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
+                
+          
+            }else{
+                JOptionPane.showMessageDialog(frame, "Login failed.Try again.");
+            }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Lecturer_Signin.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Lecturer_Signin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSigninActionPerformed
 
@@ -195,6 +207,7 @@ public class Lecturer_Signin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

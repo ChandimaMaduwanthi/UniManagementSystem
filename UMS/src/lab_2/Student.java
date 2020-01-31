@@ -25,6 +25,10 @@ public class Student {
     public Student(){
         
     }
+
+    public Student(String string, int aInt, String string0, String string1, int aInt0) {
+        
+    }
    
     
 
@@ -95,5 +99,11 @@ public class Student {
     public void SetId(int id) {
         this.id = id;
     }
+
+    public void setVisible(boolean b) {
+       
+    }
+
+   
 
 }

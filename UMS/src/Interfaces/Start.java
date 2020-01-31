@@ -45,6 +45,7 @@ public class Start extends javax.swing.JFrame {
         btnSignupL = new javax.swing.JButton();
         btnSigninS = new javax.swing.JButton();
         btnSignupS = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University Management System");
@@ -53,10 +54,11 @@ public class Start extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(178, 196, 201));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(7, 94, 218));
         jLabel1.setText("Welcome to University Management System");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 40, 931, 49);
+        jLabel1.setBounds(50, 30, 580, 49);
 
         btnSigninL.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSigninL.setText("Sign in as a Lecturer");
@@ -66,7 +68,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSigninL);
-        btnSigninL.setBounds(290, 200, 359, 51);
+        btnSigninL.setBounds(140, 220, 359, 51);
 
         btnSignupL.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSignupL.setText("Sign up as a Lecturer");
@@ -76,7 +78,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSignupL);
-        btnSignupL.setBounds(290, 340, 359, 51);
+        btnSignupL.setBounds(140, 400, 359, 51);
 
         btnSigninS.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSigninS.setText("Sign in as a Student");
@@ -86,7 +88,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSigninS);
-        btnSigninS.setBounds(290, 130, 359, 51);
+        btnSigninS.setBounds(140, 130, 359, 51);
 
         btnSignupS.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSignupS.setText("Sign up as a Student");
@@ -96,17 +98,21 @@ public class Start extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSignupS);
-        btnSignupS.setBounds(290, 270, 359, 51);
+        btnSignupS.setBounds(140, 310, 359, 51);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ASUS\\Desktop\\online-communication_1098-15842.jpg")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(30, 80, 720, 450);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
         );
 
         pack();
@@ -116,24 +122,28 @@ public class Start extends javax.swing.JFrame {
         // TODO add your handling code here:
         Student_Signup stdSignup=new Student_Signup();
         stdSignup.setVisible(true);
+        
     }//GEN-LAST:event_btnSignupSActionPerformed
 
     private void btnSigninSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninSActionPerformed
         // TODO add your handling code here:
         Student_Signin stdSignin=new Student_Signin();
         stdSignin.setVisible(true);
+        
     }//GEN-LAST:event_btnSigninSActionPerformed
 
     private void btnSignupLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupLActionPerformed
         // TODO add your handling code here:
         Lecturer_Signup lecSignup=new Lecturer_Signup();
         lecSignup.setVisible(true);
+        
     }//GEN-LAST:event_btnSignupLActionPerformed
 
     private void btnSigninLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninLActionPerformed
         // TODO add your handling code here:
         Lecturer_Signin lecSignin=new Lecturer_Signin();
         lecSignin.setVisible(true);
+        
     }//GEN-LAST:event_btnSigninLActionPerformed
 
     /**
@@ -180,6 +190,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JButton btnSignupL;
     private javax.swing.JButton btnSignupS;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

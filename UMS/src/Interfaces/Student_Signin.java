@@ -7,12 +7,16 @@ package Interfaces;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import lab_2.Student;
+
 
 /**
  *
@@ -20,8 +24,13 @@ import javax.swing.JOptionPane;
  */
 public class Student_Signin extends javax.swing.JFrame {
     
+    Connection con;
+    PreparedStatement pst;
+    ResultSet rs;
+    StuControl stdController=new StuControl();
+    Student student=new Student();
+    public static Student_Signin stdSignIn=new Student_Signin();
     
-
     /**
      * Creates new form Student_Signin
      */
@@ -45,27 +54,50 @@ public class Student_Signin extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnSignin = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University Management System");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(680, 570));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 204, 255));
         jLabel1.setText("Student Sign in Form");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(140, 80, 325, 42);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Username : ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(60, 170, 123, 28);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password : ");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(60, 260, 118, 28);
+        getContentPane().add(txtUsername);
+        txtUsername.setBounds(220, 170, 299, 28);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(220, 250, 299, 31);
 
         btnSignin.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSignin.setText("Sign in");
+        btnSignin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSigninMouseClicked(evt);
+            }
+        });
         btnSignin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSigninActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSignin);
+        btnSignin.setBounds(190, 350, 135, 51);
 
         btnCancel.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnCancel.setText("Cancel");
@@ -74,85 +106,65 @@ public class Student_Signin extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCancel);
+        btnCancel.setBounds(420, 350, 137, 51);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(75, 75, 75)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
-                .addComponent(btnSignin)
-                .addGap(69, 69, 69)
-                .addComponent(btnCancel)
-                .addGap(141, 141, 141))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1)
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSignin)
-                    .addComponent(btnCancel))
-                .addContainerGap(83, Short.MAX_VALUE))
-        );
+        jLabel4.setForeground(new java.awt.Color(251, 200, 35));
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\ASUS\\Desktop\\stock-photo-wood-working-table-pencil-tablet-laptop-computer-notebook-top-view-72ca800d-ef9b-46fb-8600-efdf7051f038.jpg")); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(10, 10, 640, 490);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+       Start st=new Start();
+        st.setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSigninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninActionPerformed
         // TODO add your handling code here:
         String username=txtUsername.getText();
         String password=txtPassword.getText();
-        Student_Profile sp=new Student_Profile();
+        
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/University_database", "root","");
-            Statement  stmt=con.createStatement();
-                            //ResultSet rst=stmt.executeQuery("SELECT subName from subject where id in (SELECT subId from std_sub where stdId=(Select id from student where userName='"+userName+"'and password='"+password+"'));");
-            ResultSet rs=stmt.executeQuery( "select * from Student_details where S_userName='"+username+"'and s_password='"+password+"';");
-                            
-            if(username.equals("S_Username")){
-                if(password.equals("S_Password")){
-                    while (rs.next()) {
-                                
+          /* Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/University_database", "root","");
+           
+            String q="select S_Username,S_Password from Student_details where S_userName='"+username+"'; ";
+            pst=con.prepareStatement(q);
+            rs=pst.executeQuery();
+
+             while (rs.next()) {
+                    if(password.equals(rs.getString("S_Password"))){ 
+                     JOptionPane.showMessageDialog(this,"Login Successful");
+                     Students sp=new Students();
                     sp.setVisible(true);
-                                
-                            }
-                }else{
-                    JOptionPane.showMessageDialog(this,"Password is Incorrect");
-                }
+                    this.dispose();
                    
+                    }}
+        } catch (SQLException ex) {
+            Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+       try{*/
+           JFrame frame=new JFrame();
+            String userName=txtUsername.getText();
+            password=txtPassword.getText();
+            student=stdController.stdSignIn(userName, password);
+            if(student!=null){
+                Students stdProfile=new Students(student);
+                stdProfile.setVisible(true);
+                this.setVisible(false);
+                this.dispose();
                 
+          
             }else{
-                JOptionPane.showMessageDialog(null,"Username Incorrect");
+                JOptionPane.showMessageDialog(null, "Login failed.Try again.");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Student_Signin.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,6 +173,12 @@ public class Student_Signin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnSigninActionPerformed
+
+    private void btnSigninMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSigninMouseClicked
+       
+            
+            
+    }//GEN-LAST:event_btnSigninMouseClicked
 
     /**
      * @param args the command line arguments
@@ -203,6 +221,7 @@ public class Student_Signin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

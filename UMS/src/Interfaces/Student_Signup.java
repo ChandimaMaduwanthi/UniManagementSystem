@@ -12,8 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lab_2.Course;
+import lab_2.Student;
 import lab_2.Subject;
 
 /**
@@ -22,8 +24,15 @@ import lab_2.Subject;
  */
 public class Student_Signup extends javax.swing.JFrame {
     
-    
-
+    private int id;
+    private String name;
+    private int Age;
+    private String Username;
+    private String CPassword;
+    private ArrayList<Course> sublist=new ArrayList<>();
+    private StuControl StdControl=new StuControl();
+    public static Student_Signup stdSignUp=new Student_Signup();
+    private Student student=new Student();
     /**
      * Creates new form Student_Signup
      */
@@ -61,29 +70,59 @@ public class Student_Signup extends javax.swing.JFrame {
         checkC1 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        btnClear = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University Management System");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(800, 800));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Student Registration Form");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(60, 20, 409, 42);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name                      :");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(65, 156, 204, 28);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Age                         :");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(60, 210, 204, 28);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Username               :");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(65, 263, 204, 28);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Password                :");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(65, 321, 204, 28);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Confirm Password :");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(65, 379, 204, 28);
+        getContentPane().add(txtName);
+        txtName.setBounds(281, 159, 476, 28);
+        getContentPane().add(txtAge);
+        txtAge.setBounds(281, 208, 476, 28);
+        getContentPane().add(txtUserName);
+        txtUserName.setBounds(281, 263, 476, 28);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(281, 321, 476, 28);
+        getContentPane().add(txtCPassword);
+        txtCPassword.setBounds(281, 379, 476, 28);
 
         btnSignup.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSignup.setText("Sign up");
@@ -92,6 +131,8 @@ public class Student_Signup extends javax.swing.JFrame {
                 btnSignupActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSignup);
+        btnSignup.setBounds(280, 650, 147, 51);
 
         btnCancel.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnCancel.setText("Cancel");
@@ -100,125 +141,53 @@ public class Student_Signup extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCancel);
+        btnCancel.setBounds(620, 651, 137, 51);
 
-        checkC3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        checkC3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        checkC3.setForeground(new java.awt.Color(255, 255, 255));
         checkC3.setText("SENG1113_Data_Structures_and_Algorithms");
+        getContentPane().add(checkC3);
+        checkC3.setBounds(174, 576, 499, 37);
 
-        checkC2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        checkC2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        checkC2.setForeground(new java.awt.Color(255, 255, 255));
         checkC2.setText("SENG1112_Fundamantales_of_Engineering");
+        getContentPane().add(checkC2);
+        checkC2.setBounds(174, 508, 469, 37);
 
-        checkC1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        checkC1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        checkC1.setForeground(new java.awt.Color(255, 255, 255));
         checkC1.setText("SENG1111_Introduction_to_Programming");
         checkC1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkC1ActionPerformed(evt);
             }
         });
+        getContentPane().add(checkC1);
+        checkC1.setBounds(174, 444, 469, 37);
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Student Id              :");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(65, 107, 204, 28);
+        getContentPane().add(txtId);
+        txtId.setBounds(281, 110, 476, 28);
 
-        btnClear.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
+        jLabel9.setIcon(new javax.swing.ImageIcon("E:\\New folder\\wallpapers\\Aqua-01-2.3.001-bigpicture_01_11.jpg")); // NOI18N
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(40, 90, 720, 550);
+
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jButton2.setText("Clear");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkC3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(checkC2)
-                        .addComponent(checkC1)))
-                .addGap(157, 157, 157))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(200, 200, 200)
-                            .addComponent(btnSignup)
-                            .addGap(45, 45, 45)
-                            .addComponent(btnClear)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancel))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtAge, txtCPassword, txtName, txtPassword, txtUserName});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {checkC1, checkC2, checkC3});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtCPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(checkC1)
-                .addGap(27, 27, 27)
-                .addComponent(checkC2)
-                .addGap(31, 31, 31)
-                .addComponent(checkC3)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSignup)
-                    .addComponent(btnCancel)
-                    .addComponent(btnClear))
-                .addContainerGap())
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAge, txtCPassword, txtName, txtPassword, txtUserName});
+        getContentPane().add(jButton2);
+        jButton2.setBounds(450, 650, 140, 51);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,79 +219,58 @@ public class Student_Signup extends javax.swing.JFrame {
         }
         else{
             try {
-                
-                //Course cs=new Course();
-                
-                int id=Integer.parseInt(txtId.getText());
-                String name=txtName.getText();
-                int Age=Integer.parseInt(txtAge.getText());
-                String Username=txtUserName.getText();
-                String CPassword=txtCPassword.getText();
-                ArrayList<Course> sublist=new ArrayList<>();
-                
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost/University_database", "root","");
-                prst=con.prepareStatement("insert into Student_details(S_Id,S_Name,S_Age,S_USername,S_Password) values(?,?,?,?,?);");
-                
-                prst.setObject(1,id);
-                prst.setObject(2,name);
-                prst.setObject(3,Age);
-                prst.setObject(4,Username);
-                prst.setObject(5,CPassword);
-                
-                prst.executeUpdate();
-                
+            // TODO add your handling code here:
+            JFrame frame=new JFrame();
+            id=Integer.parseInt(txtId.getText());
+            Username=txtUserName.getText();
+            name=txtName.getText();
+            Age=Integer.parseInt(txtAge.getText());
+            CPassword=txtPassword.getText();
+            student=StdControl.stdSignIn(Username, CPassword);
+            if(student!=null){
+                JOptionPane.showMessageDialog(frame, "UserName and Password Already Taken Try another user..");
+            
+            }else{
                 if(checkC1.isSelected()){
-                    Course course1=new Course(String.valueOf(Subject.SENG1111_Introduction_to_Programming),1);
-                    sublist.add(course1);
-                }
-                if(checkC2.isSelected()){
-                    Course course2=new Course(String.valueOf(Subject.SENG1112_Fundamantales_of_Engineering),2);
-                    sublist.add(course2);
-                }
-                if(checkC3.isSelected()){
-                    Course course3=new Course(String.valueOf(Subject.SENG1113_Data_Structures_and_Algorithms),3);
-                    sublist.add(course3);
-                }
-                
-                for(Course cs:sublist){
-                    
-                    PreparedStatement pst=con.prepareStatement("insert into Stu_Courses(S_Id,C_id) values(?,?);");
-                    pst.setObject(1, id);
-                    pst.setObject(2, cs.getId());
-                    
-                    pst.executeUpdate();
-                }
-                
-                JOptionPane.showMessageDialog(null,"Sign up Complete");
-                
-                
-                
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Student_Signup.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(Student_Signup.class.getName()).log(Level.SEVERE, null, ex);
+                Course subject1=new Course(String.valueOf(Subject.SENG1111_Introduction_to_Programming),1);
+                sublist.add(subject1);
             }
+            if(checkC2.isSelected()){
+                Course subject2=new Course(String.valueOf(Subject.SENG1112_Fundamantales_of_Engineering),2);
+                sublist.add(subject2);
+            }
+            if(checkC3.isSelected()){
+                Course subject3=new Course(String.valueOf(Subject.SENG1113_Data_Structures_and_Algorithms),3);
+                sublist.add(subject3);
+            }
+            StdControl.stdSignUp(id, name, Age, Username, CPassword, sublist);
             
             
-            
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Student_Signup.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Student_Signup.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }//GEN-LAST:event_btnSignupActionPerformed
-
+    }
     private void checkC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkC1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_checkC1ActionPerformed
 
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-                txtId.setText("");
-                txtName.setText("");
-                txtAge.setText("");
-                txtUserName.setText("");
-                txtPassword.setText("");
-                txtCPassword.setText("");
-    }//GEN-LAST:event_btnClearActionPerformed
+        txtId.setText("");
+        txtUserName.setText("");
+        txtName.setText("");
+        txtAge.setText("");
+        txtPassword.setText("");
+        txtCPassword.setText("");
+        checkC1.setSelected(false);
+        checkC2.setSelected(false);
+        checkC3.setSelected(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,11 +309,11 @@ public class Student_Signup extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSignup;
     private javax.swing.JCheckBox checkC1;
     private javax.swing.JCheckBox checkC2;
     private javax.swing.JCheckBox checkC3;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -373,6 +321,7 @@ public class Student_Signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtAge;
     private javax.swing.JPasswordField txtCPassword;
     private javax.swing.JTextField txtId;

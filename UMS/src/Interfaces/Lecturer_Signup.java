@@ -12,8 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import lab_2.Course;
+import lab_2.Lecturer;
 import lab_2.Subject;
 
 /**
@@ -22,6 +24,15 @@ import lab_2.Subject;
  */
 public class Lecturer_Signup extends javax.swing.JFrame {
 
+    private int Lid;
+    private String Lname;
+    private int LAge;
+    private String LUsername;
+    private String LCPassword;
+    private ArrayList<Course> sublist=new ArrayList<>();
+    private LecControl LecControl=new LecControl();
+    public static Lecturer_Signup lecSignUp=new Lecturer_Signup();
+    private Lecturer lec=new Lecturer();
     /**
      * Creates new form Lecturer_Signup
      */
@@ -59,35 +70,65 @@ public class Lecturer_Signup extends javax.swing.JFrame {
         checkC1 = new javax.swing.JCheckBox();
         txtLid = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        btnClear = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("University Management System");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(800, 800));
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Lecturer Registration Form");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(52, 13, 426, 42);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Name                       : ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(48, 140, 219, 28);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Age                           : ");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 200, 216, 28);
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("UserName               : ");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(44, 246, 211, 28);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Password                : ");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(44, 302, 208, 28);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Confirm Password : ");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(44, 351, 210, 28);
+        getContentPane().add(txtLname);
+        txtLname.setBounds(285, 143, 450, 28);
+        getContentPane().add(txtLage);
+        txtLage.setBounds(290, 200, 440, 28);
+        getContentPane().add(txtLUsername);
+        txtLUsername.setBounds(288, 249, 440, 28);
 
         txtLpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLpasswordActionPerformed(evt);
             }
         });
+        getContentPane().add(txtLpassword);
+        txtLpassword.setBounds(290, 300, 440, 28);
+        getContentPane().add(txtCLpassword);
+        txtCLpassword.setBounds(290, 350, 440, 28);
 
         btnSignup.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnSignup.setText("Sign up");
@@ -96,6 +137,8 @@ public class Lecturer_Signup extends javax.swing.JFrame {
                 btnSignupActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSignup);
+        btnSignup.setBounds(240, 610, 147, 51);
 
         btnCancel.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         btnCancel.setText("Cancel");
@@ -104,130 +147,49 @@ public class Lecturer_Signup extends javax.swing.JFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCancel);
+        btnCancel.setBounds(610, 610, 137, 51);
 
-        checkC3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        checkC3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        checkC3.setForeground(new java.awt.Color(255, 255, 255));
         checkC3.setText("SENG1113_Data_Structures_and_Algorithms");
+        getContentPane().add(checkC3);
+        checkC3.setBounds(177, 548, 499, 37);
 
-        checkC2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        checkC2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        checkC2.setForeground(new java.awt.Color(255, 255, 255));
         checkC2.setText("SENG1112_Fundamantales_of_Engineering");
+        getContentPane().add(checkC2);
+        checkC2.setBounds(177, 480, 469, 37);
 
-        checkC1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        checkC1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        checkC1.setForeground(new java.awt.Color(255, 255, 255));
         checkC1.setText("SENG1111_Introduction_to_Programming");
+        getContentPane().add(checkC1);
+        checkC1.setBounds(177, 416, 469, 37);
+        getContentPane().add(txtLid);
+        txtLid.setBounds(290, 90, 450, 28);
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Lecturer Id             :");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(50, 90, 219, 28);
 
-        btnClear.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        btnClear.setText("Clear");
-        btnClear.addActionListener(new java.awt.event.ActionListener() {
+        jLabel8.setIcon(new javax.swing.ImageIcon("E:\\New folder\\wallpapers\\Aqua-01-2.3.001-bigpicture_01_11.jpg")); // NOI18N
+        jLabel8.setText("jLabel8");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(40, 60, 720, 540);
+
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jButton1.setText("Clear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClearActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jLabel1)
-                .addContainerGap(333, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnSignup)
-                        .addGap(61, 61, 61)
-                        .addComponent(btnClear)
-                        .addGap(57, 57, 57)
-                        .addComponent(btnCancel)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(checkC3)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(checkC2)
-                                    .addComponent(checkC1)))
-                            .addGap(165, 165, 165))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel4)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtLUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(28, 28, 28)
-                                            .addComponent(txtLage, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(txtLpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(txtCLpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(4, 4, 4)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtLname, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                                        .addComponent(txtLid))))
-                            .addGap(20, 20, 20)))))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {checkC1, checkC2, checkC3});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtLid, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtLname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtLage, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtLUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtLpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCLpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(checkC1)
-                .addGap(27, 27, 27)
-                .addComponent(checkC2)
-                .addGap(31, 31, 31)
-                .addComponent(checkC3)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSignup)
-                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear))
-                .addGap(35, 35, 35))
-        );
+        getContentPane().add(jButton1);
+        jButton1.setBounds(440, 610, 120, 51);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,50 +226,31 @@ public class Lecturer_Signup extends javax.swing.JFrame {
         else{
             try {
                 
-                //Course cs=new Course();
-                
-                int id=Integer.parseInt(txtLid.getText());
-                String name=txtLname.getText();
-                int Age=Integer.parseInt(txtLage.getText());
-                String Username=txtLUsername.getText();
-                String CPassword=txtCLpassword.getText();
-                ArrayList<Course> sublist=new ArrayList<>();
-                
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost/University_database", "root","");
-                prst=con.prepareStatement("insert into Lecturer_details(L_Id,L_Name,L_Age,L_USername,L_Password) values(?,?,?,?,?);");
-                
-                prst.setObject(1,id);
-                prst.setObject(2,name);
-                prst.setObject(3,Age);
-                prst.setObject(4,Username);
-                prst.setObject(5,CPassword);
-                
-                prst.executeUpdate();
-                
+            JFrame frame=new JFrame();
+            Lid=Integer.parseInt(txtLid.getText());
+            LUsername=txtLUsername.getText();
+            Lname=txtLname.getText();
+            LAge=Integer.parseInt(txtLage.getText());
+            LCPassword=txtCLpassword.getText();
+            lec=LecControl.lecSignIn(LUsername, LCPassword);
+            if(lec!=null){
+                JOptionPane.showMessageDialog(frame, "UserName and Password Already Taken Try another user..");
+            
+            }else{
                 if(checkC1.isSelected()){
-                    Course course1=new Course(String.valueOf(Subject.SENG1111_Introduction_to_Programming),1);
-                    sublist.add(course1);
-                }
-                if(checkC2.isSelected()){
-                    Course course2=new Course(String.valueOf(Subject.SENG1112_Fundamantales_of_Engineering),2);
-                    sublist.add(course2);
-                }
-                if(checkC3.isSelected()){
-                    Course course3=new Course(String.valueOf(Subject.SENG1113_Data_Structures_and_Algorithms),3);
-                    sublist.add(course3);
-                }
-                
-                for(Course cs:sublist){
-                    
-                    PreparedStatement pst=con.prepareStatement("insert into lec_Courses(L_Id,C_id) values(?,?);");
-                    pst.setObject(1, id);
-                    pst.setObject(2, cs.getId());
-                    
-                    pst.executeUpdate();
-                }
-                
-                JOptionPane.showMessageDialog(null,"Sign up Complete");
+                Course subject1=new Course(String.valueOf(Subject.SENG1111_Introduction_to_Programming),1);
+                sublist.add(subject1);
+            }
+            if(checkC2.isSelected()){
+                Course subject2=new Course(String.valueOf(Subject.SENG1112_Fundamantales_of_Engineering),2);
+                sublist.add(subject2);
+            }
+            if(checkC3.isSelected()){
+                Course subject3=new Course(String.valueOf(Subject.SENG1113_Data_Structures_and_Algorithms),3);
+                sublist.add(subject3);
+            }
+            LecControl.lecSignUp(Lid, Lname, LAge, LUsername, LCPassword, sublist);
+            }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Student_Signup.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -315,16 +258,19 @@ public class Lecturer_Signup extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_btnSignupActionPerformed
     }
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                txtLid.setText("");
-                txtLname.setText("");
-                txtLage.setText("");
-                txtLUsername.setText("");
-                txtLpassword.setText("");
-                txtCLpassword.setText("");
-    }//GEN-LAST:event_btnClearActionPerformed
-    
+        txtLid.setText("");
+        txtLUsername.setText("");
+        txtLname.setText("");
+        txtLage.setText("");
+        txtLpassword.setText("");
+        txtCLpassword.setText("");
+        checkC1.setSelected(false);
+        checkC2.setSelected(false);
+        checkC3.setSelected(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+        
     /**
      * @param args the command line arguments
      */
@@ -362,11 +308,11 @@ public class Lecturer_Signup extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSignup;
     private javax.swing.JCheckBox checkC1;
     private javax.swing.JCheckBox checkC2;
     private javax.swing.JCheckBox checkC3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -374,6 +320,7 @@ public class Lecturer_Signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField txtCLpassword;
     private javax.swing.JTextField txtLUsername;
     private javax.swing.JTextField txtLage;

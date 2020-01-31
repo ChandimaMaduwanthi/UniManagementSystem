@@ -23,6 +23,12 @@ public class Lecturer {
         
     }
 
+    public Lecturer(int aInt, String string, int aInt0, String string0, String string1) {
+        
+    }
+
+   
+
 
     public void lecturer(String LName, int LAge,String Lusername,String Lpassword,ArrayList<Subject> Lcourses,int id){
         this.id=id;
@@ -88,5 +94,10 @@ public class Lecturer {
     public void setId(int id) {
         this.id = id;
     }
+
+    
+
+   
+        
 
 }
